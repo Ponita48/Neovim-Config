@@ -5,7 +5,7 @@ return {
     lazy = false,
     build = ":TSUpdate",
     opts = {
-      ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline", "dart", "java", "kotlin", },
+      ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline", "dart", "java", "kotlin", "python" },
       sync_install = false,
       highlight = {
         enable = true,
@@ -13,6 +13,7 @@ return {
       },
       indent = {
         enable = true,
+        disable = { "dart", "python" },
       },
     },
   },

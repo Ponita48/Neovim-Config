@@ -10,10 +10,11 @@ vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
 
+vim.opt.foldlevel = 1
+
 -- Indentation
 vim.opt.smarttab = true
 vim.opt.expandtab = true
-vim.opt.smartindent = true
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 
