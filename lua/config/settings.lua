@@ -2,6 +2,7 @@
 vim.g.mapleader = " "
 
 vim.opt.nu = true
+vim.opt.relativenumber = true
 vim.opt.termguicolors = true
 
 vim.wo.foldmethod = 'expr'
@@ -21,7 +22,9 @@ vim.opt.shiftwidth = 4
 vim.opt.colorcolumn = "80"
 
 -- Color Scheme
-vim.cmd("colorscheme rose-pine")
+vim.cmd("colorscheme darcula-dark")
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 
+-- LSP related
+vim.diagnostic.config({ virtual_text = true })
