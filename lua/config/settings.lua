@@ -12,6 +12,7 @@ vim.opt.hlsearch = false
 vim.opt.incsearch = true
 
 vim.opt.foldlevel = 1
+vim.opt.scrolloff = 8
 
 -- Indentation
 vim.opt.smarttab = true
