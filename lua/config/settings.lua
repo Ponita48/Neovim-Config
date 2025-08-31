@@ -26,6 +26,7 @@ vim.opt.colorcolumn = "80"
 vim.cmd("colorscheme darcula-dark")
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+vim.api.nvim_set_hl(0, "Folded", { bg = "none" })
 
 -- LSP related
 vim.diagnostic.config({ virtual_text = true })
