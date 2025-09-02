@@ -2,7 +2,7 @@
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 vim.keymap.set("n", "<leader>tt", ":split | terminal<CR>")
 vim.keymap.set("n", "gp", function() vim.lsp.buf.hover({ border = { "↖", "─", "┐", "│", "┘", "─", "└", "│" } }) end)
-vim.keymap.set("n", "<leader>tn", function() require("tono.generator").select_from_files() end)
+vim.keymap.set("n", "<leader>fn", function() vim.lsp.buf.format() end)
 
 -- insert mode
 
