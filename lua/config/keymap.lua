@@ -1,8 +1,8 @@
 -- normal mode
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 vim.keymap.set("n", "<leader>tt", ":split | terminal<CR>")
 vim.keymap.set("n", "gp", function() vim.lsp.buf.hover({ border = { "↖", "─", "┐", "│", "┘", "─", "└", "│" } }) end)
 vim.keymap.set("n", "<leader>fn", function() vim.lsp.buf.format() end)
+vim.keymap.set("n", "<leader>ps", function() vim.cmd(":NeovimProjectDiscover history") end)
 
 -- insert mode
 
