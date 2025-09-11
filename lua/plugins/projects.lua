@@ -3,6 +3,7 @@ return {
         "coffebar/neovim-project",
         opts = {
             projects = { -- define project roots
+                "~/.config/nvim",
                 "~/projects/*",
                 "~/projects/nova/*",
                 "~/projects/private/*",
