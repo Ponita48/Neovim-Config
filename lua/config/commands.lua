@@ -4,7 +4,7 @@ local function launch_avd()
     local actions = require("telescope.actions")
     local action_state = require("telescope.actions.state")
     local config_values = require("telescope.config").values
-    local previewers = require("telescope.previewers")
+    local themes = require("telescope.themes");
 
     local android_sdk = vim.fn.expand(vim.fn.expand(vim.env.ANDROID_HOME or vim.g.android_sdk))
     local emulator = android_sdk .. "/emulator/emulator"
@@ -22,11 +22,10 @@ local function launch_avd()
     end
     table.remove(avds, 1)
 
-    pickers.new({}, {
+    pickers.new( themes.get_dropdown(), {
         prompt_title = "AVD to Start",
         finder = finders.new_table(avds),
         sorter = config_values.generic_sorter({}),
-        previewer = previewers.vim_buffer_cat.new({}),
         attach_mappings = function(prompt_bufnr, _)
             actions.select_default:replace(function()
                 local selection = action_state.get_selected_entry()

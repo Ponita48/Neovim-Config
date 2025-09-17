@@ -6,7 +6,32 @@ return {
             "nvim-neotest/nvim-nio"
         },
         keys = {
-            { "<leader>bt", ":DapToggleBreakpoint<CR>", desc = "Toggle Breakpoint" },
+            { "<leader>bt",  ":DapToggleBreakpoint<CR>",                desc = "Toggle Breakpoint" },
+            { "<leader>bc",  ":DapContinue<CR>",                        desc = "Continue Execution" },
+            { "<leader>bR",  function() require('dap').restart() end,   desc = "Restart Execution" },
+            { "<leader>bqq", function() require('dap').terminate() end, desc = "Stop Execution" },
+            { "<leader>bso", function() require('dap').step_over() end, desc = "Step Over" },
+            { "<leader>bsi", function() require('dap').step_into() end, desc = "Step Into" },
+            { "<leader>bsq", function() require('dap').step_out() end,  desc = "Step Out" },
+            { "<leader>bsb", function() require('dap').step_back() end, desc = "Step Back" },
+            {
+                "<leader>br",
+                function()
+                    local session = require('dap').session()
+                    if session then
+                        session:request("hotReload", nil, function(err, _)
+                            if err then
+                                vim.notify("Hot reload error: " .. err.message, vim.log.levels.ERROR)
+                            else
+                                vim.notify("Hot reload success")
+                            end
+                        end)
+                    else
+                        vim.notify("No active dap session", vim.log.levels.WARN)
+                    end
+                end,
+                desc = "Hot Reload"
+            }
         },
         config = function()
             local dap = require("dap")
@@ -39,7 +64,7 @@ return {
                     name = "Launch flutter (dev)",
                     dartSdkPath = "/Users/dwikinurkurniawan/development/flutter/bin/dart",       -- ensure this is correct
                     flutterSdkPath = "/Users/dwikinurkurniawan/development/flutter/bin/flutter", -- ensure this is correct
-                    program = "${workspaceFolder}/lib/main.dart",                                -- ensure this is correct
+                    program = "${workspaceFolder}/lib/main_dev.dart",                            -- ensure this is correct
                     cwd = "${workspaceFolder}",
                     toolArgs = { "--flavor", "dev" }
                 },
@@ -49,7 +74,7 @@ return {
                     name = "Launch flutter (staging)",
                     dartSdkPath = "/Users/dwikinurkurniawan/development/flutter/bin/dart",       -- ensure this is correct
                     flutterSdkPath = "/Users/dwikinurkurniawan/development/flutter/bin/flutter", -- ensure this is correct
-                    program = "${workspaceFolder}/lib/main.dart",                                -- ensure this is correct
+                    program = "${workspaceFolder}/lib/main_staging.dart",                        -- ensure this is correct
                     cwd = "${workspaceFolder}",
                     toolArgs = { "--flavor", "staging" }
                 },
@@ -59,7 +84,7 @@ return {
                     name = "Launch flutter (Production)",
                     dartSdkPath = "/Users/dwikinurkurniawan/development/flutter/bin/dart",       -- ensure this is correct
                     flutterSdkPath = "/Users/dwikinurkurniawan/development/flutter/bin/flutter", -- ensure this is correct
-                    program = "${workspaceFolder}/lib/main.dart",                                -- ensure this is correct
+                    program = "${workspaceFolder}/lib/main_production.dart",                     -- ensure this is correct
                     cwd = "${workspaceFolder}",
                     toolArgs = { "--flavor", "production" }
                 },
@@ -69,7 +94,7 @@ return {
                     name = "Launch flutter (dev) - Modularization",
                     dartSdkPath = "/Users/dwikinurkurniawan/development/flutter/bin/dart",       -- ensure this is correct
                     flutterSdkPath = "/Users/dwikinurkurniawan/development/flutter/bin/flutter", -- ensure this is correct
-                    program = "${workspaceFolder}/example/lib/main.dart",                        -- ensure this is correct
+                    program = "${workspaceFolder}/example/lib/main_dev.dart",                    -- ensure this is correct
                     cwd = "${workspaceFolder}/example",
                     toolArgs = { "--flavor", "dev" }
                 },
@@ -79,7 +104,7 @@ return {
                     name = "Launch flutter (staging) - Modularization",
                     dartSdkPath = "/Users/dwikinurkurniawan/development/flutter/bin/dart",       -- ensure this is correct
                     flutterSdkPath = "/Users/dwikinurkurniawan/development/flutter/bin/flutter", -- ensure this is correct
-                    program = "${workspaceFolder}/example/lib/main.dart",                        -- ensure this is correct
+                    program = "${workspaceFolder}/example/lib/main_staging.dart",                -- ensure this is correct
                     cwd = "${workspaceFolder}/example",
                     toolArgs = { "--flavor", "staging" }
                 },
@@ -89,11 +114,12 @@ return {
                     name = "Launch flutter (Production) - Modularization",
                     dartSdkPath = "/Users/dwikinurkurniawan/development/flutter/bin/dart",       -- ensure this is correct
                     flutterSdkPath = "/Users/dwikinurkurniawan/development/flutter/bin/flutter", -- ensure this is correct
-                    program = "${workspaceFolder}/example/lib/main.dart",                        -- ensure this is correct
+                    program = "${workspaceFolder}/example/lib/main_production.dart",             -- ensure this is correct
                     cwd = "${workspaceFolder}/example",
                     toolArgs = { "--flavor", "production" }
                 },
             }
+
             -- Dart CLI adapter (recommended)
             dap.adapters.dart = {
                 type = 'executable',
@@ -106,6 +132,8 @@ return {
                 args = { 'debug_adapter' },
             }
 
+            dap.defaults.fallback.exception_breakpoints = {}
+
             -- auto open/close dapui
             dap.listeners.after.event_initialized["dapui_config"] = function()
                 dapui.open()
@@ -116,6 +144,25 @@ return {
             dap.listeners.before.event_exited["dapui_config"] = function()
                 dapui.close()
             end
+
+            vim.api.nvim_create_autocmd("BufWritePost", {
+                pattern = "*.dart",
+                callback =
+                    function()
+                        local session = require('dap').session()
+                        if session then
+                            session:request("hotReload", nil, function(err, _)
+                                if err then
+                                    vim.notify("Hot reload error: " .. err.message, vim.log.levels.ERROR)
+                                else
+                                    vim.notify("Hot reload success")
+                                end
+                            end)
+                        else
+                            vim.notify("No active dap session", vim.log.levels.WARN)
+                        end
+                    end,
+            })
         end,
     },
 }
