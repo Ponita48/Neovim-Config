@@ -14,6 +14,9 @@ return {
             { "<leader>bsi", function() require('dap').step_into() end, desc = "Step Into" },
             { "<leader>bsq", function() require('dap').step_out() end,  desc = "Step Out" },
             { "<leader>bsb", function() require('dap').step_back() end, desc = "Step Back" },
+            { "<leader>duo", function() require('dapui').open() end,    desc = "Show DAP UI" },
+            { "<leader>duc", function() require('dapui').close() end,   desc = "Close DAP UI" },
+            { "<leader>dut", function() require('dapui').toggle() end,  desc = "Toggle DAP UI" },
             {
                 "<leader>br",
                 function()
@@ -153,13 +156,10 @@ return {
                         if session then
                             session:request("hotReload", nil, function(err, _)
                                 if err then
-                                    vim.notify("Hot reload error: " .. err.message, vim.log.levels.ERROR)
                                 else
                                     vim.notify("Hot reload success")
                                 end
                             end)
-                        else
-                            vim.notify("No active dap session", vim.log.levels.WARN)
                         end
                     end,
             })

@@ -22,7 +22,7 @@ local function launch_avd()
     end
     table.remove(avds, 1)
 
-    pickers.new( themes.get_dropdown(), {
+    pickers.new(themes.get_dropdown(), {
         prompt_title = "AVD to Start",
         finder = finders.new_table(avds),
         sorter = config_values.generic_sorter({}),
@@ -50,3 +50,12 @@ vim.api.nvim_create_user_command(
     function() launch_avd() end,
     { desc = "Run AVD Emulator with telescope picker" }
 )
+
+vim.api.nvim_create_autocmd("User", {
+    pattern = "SessionLoadPost",
+    callback = function()
+        vim.lsp.stop_client(vim.lsp.get_clients())
+
+        vim.cmd("doautocmd FileType")
+    end
+})

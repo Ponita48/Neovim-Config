@@ -41,21 +41,6 @@ return {
                     enabled = true,
                     show_with_selection = true,
                 },
-                menu = {
-                    columns = {
-                        { 'item_idx' },
-                        { 'kind_icon' },
-                        { 'label',    'label_description', gap = 1 },
-                    },
-                    components = {
-                        item_idx = {
-                            text = function(ctx)
-                                return ctx.idx == 10 and '0' or ctx.idx >= 10 and ' ' or tostring(ctx.idx)
-                            end,
-                            highlight = 'BlinkCmpItemIdx' -- optional, only if you want to change its color
-                        }
-                    }
-                }
             },
 
             -- Default list of enabled providers defined so that you can extend it

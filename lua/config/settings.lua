@@ -14,7 +14,8 @@ vim.opt.incsearch = true
 vim.opt.foldlevel = 1
 vim.opt.scrolloff = 8
 
-vim.opt.swapfile = false
+vim.opt.updatetime = 50
+vim.opt.ignorecase = true
 
 -- Indentation
 vim.opt.smarttab = true
@@ -32,3 +33,10 @@ vim.api.nvim_set_hl(0, "Folded", { bg = "none" })
 
 -- LSP related
 vim.diagnostic.config({ virtual_text = true })
+
+-- Undotree
+vim.opt.swapfile = false
+vim.backup = false
+vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+vim.opt.undofile = true
+

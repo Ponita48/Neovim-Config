@@ -15,9 +15,9 @@ return {
         config = function()
             require("lspconfig").lua_ls.setup {}
             require("lspconfig").pylsp.setup {}
-            require("lspconfig").dartls.setup {}
 
-            vim.keymap.set("n", "<leader>zz", function() vim.lsp.buf.format() end)
+            vim.keymap.set("n", "<leader>zz", function() vim.lsp.buf.format() end, { desc = "Format Code" })
+            vim.keymap.set("n", "<leader>oi", function() vim.lsp.buf.code_action({ context = { only = { "source.organizeImports" } }, apply = true }) end, { desc = "Optimize Imports"})
         end,
     },
 }
