@@ -6,6 +6,9 @@ vim.keymap.set("n", "<leader>ps", function() vim.cmd(":NeovimProjectDiscover his
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "<leader>er", ":RunEmulator<CR>", { silent = true })
+vim.keymap.set("n", "<leader>ed", function()
+    vim.fn.jobstart({ "scrcpy", "-m1080" }, { detach = true })
+end, { silent = true , desc = "Mirror Connected Android Devices"})
 
 -- insert mode
 

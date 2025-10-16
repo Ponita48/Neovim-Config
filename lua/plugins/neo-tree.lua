@@ -15,7 +15,7 @@ return {
             },
         },
         keys = {
-            { "<leader>nn", ":Neotree toggle position=right<CR>", desc = "Open File Browser", silent = true },
+            { "<leader>nn", ":Neotree toggle position=left<CR>", desc = "Open File Browser", silent = true },
         },
     }
 }

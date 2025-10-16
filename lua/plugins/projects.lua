@@ -7,6 +7,7 @@ return {
                 "~/projects/*",
                 "~/projects/nova/*",
                 "~/projects/private/*",
+                "~/projects/flutter/*"
             },
             picker = {
                 type = "telescope", -- one of "telescope", "fzf-lua", or "snacks"

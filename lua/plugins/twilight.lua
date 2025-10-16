@@ -14,12 +14,9 @@ return {
             -- treesitter is used to automatically expand the visible text,
             -- but you can further control the types of nodes that should always be fully expanded
             expand = { -- for treesitter, we we always try to expand to the top-most ancestor with these types
-                "function",
-                "method",
-                "table",
-                "if_statement",
-                "return_statement",
-                "function_body",
+              "set_or_map_literal",
+              "table",
+              "block"
             },
             exclude = {}, -- exclude these filetypes
         },

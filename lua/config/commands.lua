@@ -33,7 +33,7 @@ local function launch_avd()
                 actions.close(prompt_bufnr)
 
                 vim.notify("Device selected: " .. selection.value .. ". Launching!", vim.log.levels.INFO, {})
-                vim.system({ emulator, "@" .. selection.value }, { text = true }, vim.schedule_wrap(function(obj)
+                vim.system({ emulator, "@" .. selection.value, '-no-snapshot-load' }, { text = true }, vim.schedule_wrap(function(obj)
                     if obj.code ~= 0 then
                         vim.notify("Launch failed: " .. obj.stderr, vim.log.levels.WARN, {})
                     end
@@ -58,4 +58,12 @@ vim.api.nvim_create_autocmd("User", {
 
         vim.cmd("doautocmd FileType")
     end
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "dart",
+  callback = function()
+    vim.opt.shiftwidth = 2
+    vim.opt.tabstop = 2
+  end
 })
