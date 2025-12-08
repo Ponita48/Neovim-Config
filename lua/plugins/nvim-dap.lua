@@ -47,13 +47,13 @@ return {
               "scopes",
               "breakpoints",
               "stacks",
-              "watches",
             },
-            size = 40, -- same as default
+            size = 30, -- default = 40
             position = "left",
           },
           {
             elements = {
+              "watches",
               "repl", -- keep the REPL
               -- removed "console"
             },
@@ -68,8 +68,6 @@ return {
           type = "dart",
           request = "launch",
           name = "Launch dart",
-          dartSdkPath = "/Users/dwikinurkurniawan/development/flutter/bin/dart",           -- ensure this is correct
-          flutterSdkPath = "/Users/dwikinurkurniawan/development/flutter/bin/flutter",
           program = "${workspaceFolder}/lib/main.dart",                                    -- ensure this is correct
           cwd = "${workspaceFolder}",
         },
@@ -77,8 +75,6 @@ return {
           type = "flutter",
           request = "launch",
           name = "Launch flutter",
-          dartSdkPath = "/Users/dwikinurkurniawan/development/flutter/bin/dart",                 -- ensure this is correct
-          flutterSdkPath = "/Users/dwikinurkurniawan/development/flutter/bin/flutter",           -- ensure this is correct
           program = "${workspaceFolder}/lib/main.dart",                                          -- ensure this is correct
           cwd = "${workspaceFolder}",
         },
@@ -86,8 +82,6 @@ return {
           type = "flutter",
           request = "launch",
           name = "Launch flutter (dev)",
-          dartSdkPath = "/Users/dwikinurkurniawan/development/flutter/bin/dart",                 -- ensure this is correct
-          flutterSdkPath = "/Users/dwikinurkurniawan/development/flutter/bin/flutter",           -- ensure this is correct
           program = "${workspaceFolder}/lib/main_dev.dart",                                      -- ensure this is correct
           cwd = "${workspaceFolder}",
           toolArgs = { "--flavor", "dev" }
@@ -96,8 +90,6 @@ return {
           type = "flutter",
           request = "launch",
           name = "Launch flutter (staging)",
-          dartSdkPath = "/Users/dwikinurkurniawan/development/flutter/bin/dart",                 -- ensure this is correct
-          flutterSdkPath = "/Users/dwikinurkurniawan/development/flutter/bin/flutter",           -- ensure this is correct
           program = "${workspaceFolder}/lib/main_staging.dart",                                  -- ensure this is correct
           cwd = "${workspaceFolder}",
           toolArgs = { "--flavor", "staging" }
@@ -106,8 +98,6 @@ return {
           type = "flutter",
           request = "launch",
           name = "Launch flutter (Production)",
-          dartSdkPath = "/Users/dwikinurkurniawan/development/flutter/bin/dart",                 -- ensure this is correct
-          flutterSdkPath = "/Users/dwikinurkurniawan/development/flutter/bin/flutter",           -- ensure this is correct
           program = "${workspaceFolder}/lib/main_production.dart",                               -- ensure this is correct
           cwd = "${workspaceFolder}",
           toolArgs = { "--flavor", "production", "--debug"}
@@ -116,8 +106,6 @@ return {
           type = "flutter",
           request = "launch",
           name = "Launch flutter (dev) - Modularization",
-          dartSdkPath = "/Users/dwikinurkurniawan/development/flutter/bin/dart",                 -- ensure this is correct
-          flutterSdkPath = "/Users/dwikinurkurniawan/development/flutter/bin/flutter",           -- ensure this is correct
           program = "${workspaceFolder}/example/lib/main_dev.dart",                              -- ensure this is correct
           cwd = "${workspaceFolder}/example",
           toolArgs = { "--flavor", "dev" }
@@ -126,8 +114,6 @@ return {
           type = "flutter",
           request = "launch",
           name = "Launch flutter (staging) - Modularization",
-          dartSdkPath = "/Users/dwikinurkurniawan/development/flutter/bin/dart",                 -- ensure this is correct
-          flutterSdkPath = "/Users/dwikinurkurniawan/development/flutter/bin/flutter",           -- ensure this is correct
           program = "${workspaceFolder}/example/lib/main_staging.dart",                          -- ensure this is correct
           cwd = "${workspaceFolder}/example",
           toolArgs = { "--flavor", "staging" }
@@ -136,13 +122,21 @@ return {
           type = "flutter",
           request = "launch",
           name = "Launch flutter (Production) - Modularization",
-          dartSdkPath = "/Users/dwikinurkurniawan/development/flutter/bin/dart",                 -- ensure this is correct
-          flutterSdkPath = "/Users/dwikinurkurniawan/development/flutter/bin/flutter",           -- ensure this is correct
           program = "${workspaceFolder}/example/lib/main_production.dart",                       -- ensure this is correct
           cwd = "${workspaceFolder}/example",
           toolArgs = { "--flavor", "production", "--debug" }
         },
       }
+
+      -- Prioritize FVM dir instead of Flutter global
+      local function find_fvm_flutter()
+        local dir = vim.fn.expand("%:p:h")
+        local fvm_dir = vim.fn.finddir(".fvm/flutter_sdk/bin", dir .. ";")
+        if fvm_dir ~= "" then
+          return fvm_dir .. "/flutter"
+        end
+        return "flutter"
+      end
 
       -- Dart CLI adapter (recommended)
       dap.adapters.dart = {
@@ -152,7 +146,7 @@ return {
       }
       dap.adapters.flutter = {
         type = 'executable',
-        command = 'flutter',
+        command = find_fvm_flutter(),
         args = { 'debug_adapter' },
       }
 

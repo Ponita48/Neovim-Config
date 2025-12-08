@@ -51,15 +51,6 @@ vim.api.nvim_create_user_command(
     { desc = "Run AVD Emulator with telescope picker" }
 )
 
-vim.api.nvim_create_autocmd("User", {
-    pattern = "SessionLoadPost",
-    callback = function()
-        vim.lsp.stop_client(vim.lsp.get_clients())
-
-        vim.cmd("doautocmd FileType")
-    end
-})
-
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "dart",
   callback = function()

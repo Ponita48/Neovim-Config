@@ -13,12 +13,13 @@ end, { silent = true , desc = "Mirror Connected Android Devices"})
 -- insert mode
 
 -- visual mode
-vim.keymap.set("v", "$(", "<esc>`>a)<esc>`<i(<esc>", { noremap = true })
-vim.keymap.set("v", "$[", "<esc>`>a]<esc>`<i[<esc>", { noremap = true })
-vim.keymap.set("v", "${", "<esc>`>a}<esc>`<i{<esc>", { noremap = true })
-vim.keymap.set("v", "$\"", "<esc>`>a\"<esc>`<i\"<esc>", { noremap = true })
-vim.keymap.set("v", "$'", "<esc>`>a'<esc>`<i'<esc>", { noremap = true })
-vim.keymap.set("v", "$`", "<esc>`>a`<esc>`<i`<esc>", { noremap = true })
+vim.keymap.set("v", "g(", "<esc>`>a)<esc>`<i(<esc>", { noremap = true })
+vim.keymap.set("v", "g[", "<esc>`>a]<esc>`<i[<esc>", { noremap = true })
+vim.keymap.set("v", "g{", "<esc>`>a}<esc>`<i{<esc>", { noremap = true })
+vim.keymap.set("v", "g\"", "<esc>`>a\"<esc>`<i\"<esc>", { noremap = true })
+vim.keymap.set("v", "g'", "<esc>`>a'<esc>`<i'<esc>", { noremap = true })
+vim.keymap.set("v", "g`", "<esc>`>a`<esc>`<i`<esc>", { noremap = true })
+vim.keymap.set("v", "g<", "<esc>`>a><esc>`<i<<esc>", { noremap = true })
 
 -- terminal mode
 vim.keymap.set("t", "<C-w>", [[<C-\><C-n><C-w>]], { noremap = true })
