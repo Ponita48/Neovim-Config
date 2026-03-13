@@ -45,14 +45,14 @@ vim.opt.undofile = true
 
 -- Fold Related
 function IdeaFoldText()
-  local startLine = vim.fn.getline(vim.v.foldstart)
-  local endLine = vim.v.foldend
-  local lineCount = endLine - vim.v.foldstart + 1
+    local startLine = vim.fn.getline(vim.v.foldstart)
+    local endLine = vim.v.foldend
+    local lineCount = endLine - vim.v.foldstart + 1
 
-  return startLine .. " ... (" .. lineCount .. " lines)" 
+    return startLine .. " ... (" .. lineCount .. " lines)"
 end
+
 --
 vim.opt.foldtext = "v:lua.IdeaFoldText()"
 vim.opt.foldlevel = 1
 vim.opt.fillchars = { fold = " " }
-

@@ -1,0 +1,32 @@
+{
+    "td flowchart" : {
+        "prefix": "td flowchart",
+        "body": [
+            "```plantuml",
+            "@startuml",
+            "start",
+            "${1:Content}",
+            "end",
+            "@enduml",
+            "```"
+        ]
+    },
+    "td sequence": {
+        "prefix": "td sequence",
+        "body": [
+            "```plantuml",
+            "@startuml",
+            "title Flow ${1: Flow Name}",
+            "",
+            "actor       \"User\"      as user",
+            "participant \"Nova\"      as app",
+            "database    \"Backend\"   as be",
+            "database    \"Local DB\"  as local",
+            "",
+            "${2:Content}",
+            "",
+            "@enduml",
+            "```"
+        ]
+    }
+}

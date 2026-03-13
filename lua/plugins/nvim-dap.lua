@@ -6,17 +6,18 @@ return {
       "nvim-neotest/nvim-nio"
     },
     keys = {
-      { "<leader>bt",  ":DapToggleBreakpoint<CR>",                desc = "Toggle Breakpoint" },
-      { "<leader>bc",  ":DapContinue<CR>",                        desc = "Continue Execution" },
-      { "<leader>bR",  function() require('dap').restart() end,   desc = "Restart Execution" },
-      { "<leader>bqq", function() require('dap').terminate() end, desc = "Stop Execution" },
-      { "<leader>bso", function() require('dap').step_over() end, desc = "Step Over" },
-      { "<leader>bsi", function() require('dap').step_into() end, desc = "Step Into" },
-      { "<leader>bsq", function() require('dap').step_out() end,  desc = "Step Out" },
-      { "<leader>bsb", function() require('dap').step_back() end, desc = "Step Back" },
-      { "<leader>duo", function() require('dapui').open() end,    desc = "Show DAP UI" },
-      { "<leader>duc", function() require('dapui').close() end,   desc = "Close DAP UI" },
-      { "<leader>dut", function() require('dapui').toggle() end,  desc = "Toggle DAP UI" },
+      { "<leader>bt",  ":DapToggleBreakpoint<CR>",                                                     desc = "Toggle Breakpoint" },
+      { "<leader>bc",  ":DapContinue<CR>",                                                             desc = "Continue Execution" },
+      { "<leader>bR",  function() require('dap').restart() end,                                        desc = "Restart Execution" },
+      { "<leader>bqq", function() require('dap').terminate() end,                                      desc = "Stop Execution" },
+      { "<leader>bso", function() require('dap').step_over() end,                                      desc = "Step Over" },
+      { "<leader>bsi", function() require('dap').step_into() end,                                      desc = "Step Into" },
+      { "<leader>bsq", function() require('dap').step_out() end,                                       desc = "Step Out" },
+      { "<leader>bsb", function() require('dap').step_back() end,                                      desc = "Step Back" },
+      { "<leader>duo", function() require('dapui').open() end,                                         desc = "Show DAP UI" },
+      { "<leader>duc", function() require('dapui').close() end,                                        desc = "Close DAP UI" },
+      { "<leader>dut", function() require('dapui').toggle() end,                                       desc = "Toggle DAP UI" },
+      { "<leader>de",  function() require('dapui').elements.watches.add(vim.fn.expand('<cword>')) end, desc = "Watch cWORD" },
       {
         "<leader>br",
         function()
@@ -34,7 +35,7 @@ return {
           end
         end,
         desc = "Hot Reload"
-      }
+      },
     },
     config = function()
       local dap = require("dap")
@@ -68,21 +69,21 @@ return {
           type = "dart",
           request = "launch",
           name = "Launch dart",
-          program = "${workspaceFolder}/lib/main.dart",                                    -- ensure this is correct
+          program = "${workspaceFolder}/lib/main.dart", -- ensure this is correct
           cwd = "${workspaceFolder}",
         },
         {
           type = "flutter",
           request = "launch",
           name = "Launch flutter",
-          program = "${workspaceFolder}/lib/main.dart",                                          -- ensure this is correct
+          program = "${workspaceFolder}/lib/main.dart", -- ensure this is correct
           cwd = "${workspaceFolder}",
         },
         {
           type = "flutter",
           request = "launch",
           name = "Launch flutter (dev)",
-          program = "${workspaceFolder}/lib/main_dev.dart",                                      -- ensure this is correct
+          program = "${workspaceFolder}/lib/main_dev.dart", -- ensure this is correct
           cwd = "${workspaceFolder}",
           toolArgs = { "--flavor", "dev" }
         },
@@ -90,7 +91,7 @@ return {
           type = "flutter",
           request = "launch",
           name = "Launch flutter (staging)",
-          program = "${workspaceFolder}/lib/main_staging.dart",                                  -- ensure this is correct
+          program = "${workspaceFolder}/lib/main_staging.dart", -- ensure this is correct
           cwd = "${workspaceFolder}",
           toolArgs = { "--flavor", "staging" }
         },
@@ -98,15 +99,15 @@ return {
           type = "flutter",
           request = "launch",
           name = "Launch flutter (Production)",
-          program = "${workspaceFolder}/lib/main_production.dart",                               -- ensure this is correct
+          program = "${workspaceFolder}/lib/main_production.dart", -- ensure this is correct
           cwd = "${workspaceFolder}",
-          toolArgs = { "--flavor", "production", "--debug"}
+          toolArgs = { "--flavor", "production", "--debug" }
         },
         {
           type = "flutter",
           request = "launch",
           name = "Launch flutter (dev) - Modularization",
-          program = "${workspaceFolder}/example/lib/main_dev.dart",                              -- ensure this is correct
+          program = "${workspaceFolder}/example/lib/main_dev.dart", -- ensure this is correct
           cwd = "${workspaceFolder}/example",
           toolArgs = { "--flavor", "dev" }
         },
@@ -114,7 +115,7 @@ return {
           type = "flutter",
           request = "launch",
           name = "Launch flutter (staging) - Modularization",
-          program = "${workspaceFolder}/example/lib/main_staging.dart",                          -- ensure this is correct
+          program = "${workspaceFolder}/example/lib/main_staging.dart", -- ensure this is correct
           cwd = "${workspaceFolder}/example",
           toolArgs = { "--flavor", "staging" }
         },
@@ -122,9 +123,16 @@ return {
           type = "flutter",
           request = "launch",
           name = "Launch flutter (Production) - Modularization",
-          program = "${workspaceFolder}/example/lib/main_production.dart",                       -- ensure this is correct
+          program = "${workspaceFolder}/example/lib/main_production.dart", -- ensure this is correct
           cwd = "${workspaceFolder}/example",
           toolArgs = { "--flavor", "production", "--debug" }
+        },
+        {
+          type = "dart",
+          request = "launch",
+          name = "Run Test (Current File)",
+          program = "${file}", -- ensure this is correct
+          cwd = "${workspaceFolder}",
         },
       }
 

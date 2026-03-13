@@ -58,10 +58,8 @@ return {
                     })
                 end,
                 settings = {
-                    Lua = {}
                 }
             })
-            vim.lsp.config("pylsp", {})
             vim.lsp.config("tsserver", {
                 cmd = { 'typescript-language-server', '--stdio' },
                 filetypes = { 'javascript', 'typescript' },
@@ -74,18 +72,32 @@ return {
             vim.keymap.set("n", "<C-CR>", function() vim.lsp.buf.code_action() end, { desc = "Code Action" })
 
             vim.keymap.set("n", "]e",
-                function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR }) end,
+                function() vim.diagnostic.jump({ count = 1, float = true, severity = vim.diagnostic.severity.ERROR }) end,
                 { desc = "Go To Next Error" })
             vim.keymap.set("n", "[e",
-                function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR }) end,
-                { desc = "Go To Next Error" })
+                function() vim.diagnostic.jump({ count = -1, float = true, severity = vim.diagnostic.severity.ERROR }) end,
+                { desc = "Go To Previous Error" })
 
             vim.keymap.set("n", "]w",
-                function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.WARNING }) end,
+                function() vim.diagnostic.jump({ count = 1, float = true, severity = vim.diagnostic.severity.WARN }) end,
                 { desc = "Go To Next Warning" })
             vim.keymap.set("n", "[w",
-                function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.WARNING }) end,
-                { desc = "Go To Next Warning" })
+                function() vim.diagnostic.jump({ count = -1, float = true, severity = vim.diagnostic.severity.WARN }) end,
+                { desc = "Go To Prev Warning" })
+
+            vim.keymap.set("n", "]i",
+                function() vim.diagnostic.jump({ count = 1, float = true, severity = vim.diagnostic.severity.INFO }) end,
+                { desc = "Go To Next Info" })
+            vim.keymap.set("n", "[i",
+                function() vim.diagnostic.jump({ count = -1, float = true, severity = vim.diagnostic.severity.INFO }) end,
+                { desc = "Go To Prev Info" })
+
+            vim.keymap.set("n", "]h",
+                function() vim.diagnostic.jump({ count = 1, float = true, severity = vim.diagnostic.severity.HINT }) end,
+                { desc = "Go To Next Hint" })
+            vim.keymap.set("n", "[h",
+                function() vim.diagnostic.jump({ count = -1, float = true, severity = vim.diagnostic.severity.HINT }) end,
+                { desc = "Go To Prev Hint" })
         end,
     },
 }

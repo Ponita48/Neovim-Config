@@ -50,11 +50,3 @@ vim.api.nvim_create_user_command(
     function() launch_avd() end,
     { desc = "Run AVD Emulator with telescope picker" }
 )
-
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "dart",
-  callback = function()
-    vim.opt.shiftwidth = 2
-    vim.opt.tabstop = 2
-  end
-})
